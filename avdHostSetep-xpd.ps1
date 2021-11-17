@@ -1,26 +1,11 @@
 #Install Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-choco install vscode -y 
+
 choco install googlechrome -y 
 choco install firefox -y
-choco install dotnet -y
-
-choco install microsoft-windows-terminal -y
 
 
-# Install Powershell 7
-write-host 'Customization: Install the latest Microsoft PowerShell'
-$appName = 'pwsh'
-$drive = 'C:\'
-New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
-$LocalPath = $drive + '\' + $appName 
-set-Location $LocalPath 
-$pwshURL = 'https://github.com/PowerShell/PowerShell/releases/download/v7.2.0/PowerShell-7.2.0-win-x64.msi'
-$msi = 'pwsh.msi'
-$outputPath = $LocalPath + '\' + $msi
-Invoke-WebRequest -uri $pwshURL -OutFile $outputPath
-Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 USE_MU=1 ENABLE_MU=1" -Wait
 
  # set regKey
  write-host 'AIB Customization: Set required regKey'
@@ -61,5 +46,5 @@ Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet ADD_EXPLO
  $outputPath = $LocalPath + '\' + $teamsMsi
  Invoke-WebRequest -Uri $teamsURL -OutFile $outputPath
  Start-Process -FilePath msiexec.exe -Args "/I $outputPath /quiet /norestart /log teams.log ALLUSER=1 ALLUSERS=1" -Wait
- write-host 'AIB Customization: Finished Install MS Teams' 
+ write-host 'AIB Customization: Finished Install MS Teams'
 

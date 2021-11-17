@@ -22,6 +22,7 @@ choco install wsl2 -y
 choco install wsl-ubuntu-2004 -y
 choco install displaylink -y
 choco install spotify -y
+choco install foxitreader -y
 
 
 # Install Powershell 7

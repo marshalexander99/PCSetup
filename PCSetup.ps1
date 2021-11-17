@@ -53,3 +53,19 @@ Start-Process -FilePath $outputPath -Args "/install /VERYSILENT " -Wait
 write-host 'Finished Install the of KeePass'
 
 
+# Install AVD Client
+write-host 'Customization: Install the latest AVD Client'
+$appName = 'AVDClient'
+$drive = 'C:\'
+New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
+$LocalPath = $drive + '\' + $appName 
+set-Location $LocalPath 
+$URL = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWOzKx'
+$msi = 'avdclient.msi'
+$outputPath = $LocalPath + '\' + $msi
+Invoke-WebRequest -uri $URL -OutFile $outputPath
+Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
+
+
+
+

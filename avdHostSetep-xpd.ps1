@@ -4,6 +4,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 choco install googlechrome -y 
 choco install firefox -y
+choco install adobereader -y
 
 
 

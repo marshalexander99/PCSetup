@@ -1,9 +1,11 @@
 ﻿[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet
+Set-PSRepository PSGallery -InstallationPolicy Trusted
 
-Install-Module PowershellGet -Force -Scope AllUsers
-Install-module Az -Scope AllUsers
-Install-module MSGraph -Scope AllUsers
+Install-Module PowershellGet -Force -Scope AllUsers -Confirm:$false
+Install-module Az -Scope AllUsers -Confirm:$false
+Install-module MSGraph -Scope AllUsers -Confirm:$false
+Install-module MSOnline -Scope AllUsers -Confirm:$false
 
 
 #Install Chocolatey
@@ -23,6 +25,7 @@ choco install wsl-ubuntu-2004 -y
 choco install displaylink -y
 choco install spotify -y
 choco install foxitreader -y
+choco install 7zip -y
 
 
 # Install Powershell 7

@@ -26,6 +26,7 @@ choco install displaylink -y
 choco install spotify -y
 choco install foxitreader -y
 choco install 7zip -y
+choco install forticlientvpn -y
 
 
 # Install Powershell 7
@@ -41,7 +42,7 @@ $outputPath = $LocalPath + '\' + $msi
 Invoke-WebRequest -uri $URL -OutFile $outputPath
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 USE_MU=1 ENABLE_MU=1" -Wait
 
-# KeePass
+# Install KeePass
 $appName = 'KeePass'
 $drive = 'C:\'
 New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue

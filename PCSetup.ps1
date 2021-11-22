@@ -27,7 +27,7 @@ choco install spotify -y
 choco install foxitreader -y
 choco install 7zip -y
 choco install forticlientvpn -y
-
+choco install rdmfree -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

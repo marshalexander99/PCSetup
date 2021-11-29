@@ -1,51 +1,87 @@
 #Install Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-
+# Choco install Applications
 choco install googlechrome -y 
-choco install firefox -y
 choco install adobereader -y
+choco install 7zip -y
+
+# Diable Atuo Updates
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
+
+# Enable Timezone Redirection
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fEnableTimeZoneRedirection /t REG_DWORD /d 1 /f
+
+# Disable Storage Sense
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" /v 01 /t REG_DWORD /d 0 /f
+
+# AVD Customizations
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 3 /f
+remove CorporateWerServer* from Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxMonitors /t REG_DWORD /d 4 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxXResolution /t REG_DWORD /d 5120 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxYResolution /t REG_DWORD /d 2880 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\rdp-sxs" /v MaxMonitors /t REG_DWORD /d 4 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\rdp-sxs" /v MaxXResolution /t REG_DWORD /d 5120 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\rdp-sxs" /v MaxYResolution /t REG_DWORD /d 2880 /f
+
+# Set programmatic Access to Outlook
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\REGISTRY\MACHINE\Software\Microsoft\Office\16.0\Outlook\Security" /v ObjectModelGuard /t REG_DWORD /d 0 /f
 
 
+# Install DotNet 4.8
+$appName = 'dotnet-4-8'
+$drive = 'C:\'
+New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
+$LocalPath = $drive + '\' + $appName 
+set-Location $LocalPath
+$URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/.net 4.8 (XSPED REQUIREMENT).exe'
+$URLexe = 'dotnet4-8.exe'
+$outputPath = $LocalPath + '\' + $URLexe
+Invoke-WebRequest -Uri $URL -OutFile $outputPath
+write-host 'Starting Install  Dot Net 4.8'
+Start-Process -FilePath $outputPath -Args "/q /norestart " -Wait
+write-host 'Finished Install the of Dot Net 4.8'
 
- # set regKey
- write-host 'AIB Customization: Set required regKey'
- New-Item -Path HKLM:\SOFTWARE\Microsoft -Name "Teams" 
- New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Teams -Name "IsWVDEnvironment" -Type "Dword" -Value "1"
- write-host 'AIB Customization: Finished Set required regKey'
- 
- 
- # install vc
- write-host 'AIB Customization: Install the latest Microsoft Visual C++ Redistributable'
- $appName = 'teams'
- $drive = 'C:\'
- New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
- $LocalPath = $drive + '\' + $appName 
- set-Location $LocalPath
- $visCplusURL = 'https://aka.ms/vs/16/release/vc_redist.x64.exe'
- $visCplusURLexe = 'vc_redist.x64.exe'
- $outputPath = $LocalPath + '\' + $visCplusURLexe
- Invoke-WebRequest -Uri $visCplusURL -OutFile $outputPath
- write-host 'AIB Customization: Starting Install the latest Microsoft Visual C++ Redistributable'
- Start-Process -FilePath $outputPath -Args "/install /quiet /norestart /log vcdist.log" -Wait
- write-host 'AIB Customization: Finished Install the latest Microsoft Visual C++ Redistributable'
- 
- 
- # install webSoc svc
- write-host 'AIB Customization: Install the Teams WebSocket Service'
- $webSocketsURL = 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE4AQBt'
- $webSocketsInstallerMsi = 'webSocketSvc.msi'
- $outputPath = $LocalPath + '\' + $webSocketsInstallerMsi
- Invoke-WebRequest -Uri $webSocketsURL -OutFile $outputPath
- Start-Process -FilePath msiexec.exe -Args "/I $outputPath /quiet /norestart /log webSocket.log" -Wait
- write-host 'AIB Customization: Finished Install the Teams WebSocket Service'
- 
- # install Teams
- write-host 'AIB Customization: Install MS Teams'
- $teamsURL = 'https://teams.microsoft.com/downloads/desktopurl?env=production&plat=windows&arch=x64&managedInstaller=true&download=true'
- $teamsMsi = 'teams.msi'
- $outputPath = $LocalPath + '\' + $teamsMsi
- Invoke-WebRequest -Uri $teamsURL -OutFile $outputPath
- Start-Process -FilePath msiexec.exe -Args "/I $outputPath /quiet /norestart /log teams.log ALLUSER=1 ALLUSERS=1" -Wait
- write-host 'AIB Customization: Finished Install MS Teams'
 
+# Install XSPED
+$appName = 'xsped'
+$drive = 'C:\'
+New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
+$LocalPath = $drive + '\' + $appName 
+set-Location $LocalPath
+$URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/XSPED%20setup.exe'
+$URLexe = 'xsped.exe'
+$outputPath = $LocalPath + '\' + $URLexe
+Invoke-WebRequest -Uri $URL -OutFile $outputPath
+write-host 'Starting Install  xsped'
+Start-Process -FilePath $outputPath -Args "/q /norestart " -Wait
+write-host 'Finished Install the of xsped'
+
+#  Install Wise Cloud
+$appName = 'wisecloud'
+$drive = 'C:\'
+New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
+$LocalPath = $drive + '\' + $appName 
+set-Location $LocalPath
+$URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/WiseCloudClientSetup.exe'
+$URLexe = 'wisecloud.exe'
+$outputPath = $LocalPath + '\' + $URLexe
+Invoke-WebRequest -Uri $URL -OutFile $outputPath
+write-host 'Starting Install  wisecloud'
+Start-Process -FilePath $outputPath -Args "/q /norestart " -Wait
+write-host 'Finished Install the of wisecloud'
+
+
+# Install AVD Client
+write-host 'Customization: Install Mimecast for Outlook'
+$appName = 'mimecastforoutlook'
+$drive = 'C:\'
+New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
+$LocalPath = $drive + '\' + $appName 
+set-Location $LocalPath 
+$URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/Mimecast for Outlook 7.10.0.72 (x64).msi'
+$msi = 'mimecast.msi'
+$outputPath = $LocalPath + '\' + $msi
+Invoke-WebRequest -uri $URL -OutFile $outputPath
+Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait

@@ -10,7 +10,7 @@ $URLexe = 'wisecloud.exe'
 $outputPath = $LocalPath + '\' + $URLexe
 Invoke-WebRequest -Uri $URL -OutFile $outputPath
 write-host 'Starting Install  wisecloud'
-Start-Process -FilePath $outputPath -Args "/q " -Wait
+Start-Process -FilePath $outputPath  -Wait
 write-host 'Finished Install the of wisecloud'
 
 

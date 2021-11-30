@@ -35,6 +35,7 @@ choco install greenshot -y
 choco install filezilla -y
 choco install wireshark -y
 choco install obs-studio -y
+choco install HeidiSQL -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

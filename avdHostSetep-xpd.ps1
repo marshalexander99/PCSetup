@@ -17,7 +17,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\
 
 # AVD Customizations
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 3 /f
-remove CorporateWerServer* from Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxMonitors /t REG_DWORD /d 4 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxXResolution /t REG_DWORD /d 5120 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v MaxYResolution /t REG_DWORD /d 2880 /f
@@ -43,20 +42,6 @@ write-host 'Starting Install  Dot Net 4.8'
 Start-Process -FilePath $outputPath -Args "/q /norestart " -Wait
 write-host 'Finished Install the of Dot Net 4.8'
 
-
-# Install XSPED
-$appName = 'xsped'
-$drive = 'C:\'
-New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
-$LocalPath = $drive + '\' + $appName 
-set-Location $LocalPath
-$URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/XSPED%20setup.exe'
-$URLexe = 'xsped.exe'
-$outputPath = $LocalPath + '\' + $URLexe
-Invoke-WebRequest -Uri $URL -OutFile $outputPath
-write-host 'Starting Install  xsped'
-Start-Process -FilePath $outputPath -Args "/q /norestart " -Wait
-write-host 'Finished Install the of xsped'
 
 #  Install Wise Cloud
 $appName = 'wisecloud'

@@ -32,6 +32,7 @@ choco install forticlientvpn -y
 choco install rdmfree -y
 choco install greenshot -y
 choco install filezilla -y
+choco install wireshark -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

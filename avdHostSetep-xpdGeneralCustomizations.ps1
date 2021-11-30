@@ -9,7 +9,9 @@ $URL = 'https://stgxpdavdapps.blob.core.windows.net/apps/Mimecast for Outlook 7.
 $msi = 'mimecast.msi'
 $outputPath = $LocalPath + '\' + $msi
 Invoke-WebRequest -uri $URL -OutFile $outputPath
+write-host 'Starting Install  Mimecast'
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
+write-host 'Finished Install  Mimecast'
 
 
 
@@ -24,7 +26,7 @@ $URLexe = 'wisecloud.exe'
 $outputPath = $LocalPath + '\' + $URLexe
 Invoke-WebRequest -Uri $URL -OutFile $outputPath
 write-host 'Starting Install  wisecloud'
-Start-Process -FilePath $outputPath  -Wait
+Start-Process -FilePath $outputPath
 write-host 'Finished Install the of wisecloud'
 
 

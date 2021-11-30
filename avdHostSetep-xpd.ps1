@@ -5,6 +5,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install googlechrome -y 
 choco install adobereader -y
 choco install 7zip -y
+choco install notepadplusplus -y
 
 # Diable Atuo Updates
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f

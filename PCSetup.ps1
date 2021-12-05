@@ -37,6 +37,7 @@ choco install wireshark -y
 choco install obs-studio -y
 choco install HeidiSQL -y
 choco install msoledbsql -y
+choco install discord -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

@@ -38,6 +38,7 @@ choco install obs-studio -y
 choco install HeidiSQL -y
 choco install msoledbsql -y
 choco install discord -y
+choco install AzureStorageExplorer -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'
@@ -80,7 +81,7 @@ $outputPath = $LocalPath + '\' + $msi
 Invoke-WebRequest -uri $URL -OutFile $outputPath
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
 
-# Install AZ Clie
+# Install AZ Cli
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
 
 

@@ -11,7 +11,7 @@ Install-module ExchangeOnlineManagement -Confirm:$false
 
 
 #Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 choco install git -y
 choco install notepadplusplus -y
@@ -41,6 +41,7 @@ choco install msoledbsql -y
 choco install discord -y
 choco install AzureStorageExplorer -y
 choco install anydesk -y
+choco install nmap -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'
@@ -84,7 +85,7 @@ Invoke-WebRequest -uri $URL -OutFile $outputPath
 Start-Process -FilePath msiexec.exe -Args "/package $outputPath /quiet" -Wait
 
 # Install AZ Cli
-$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
+$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; remove-item .\AzureCLI.msi
 
 
 

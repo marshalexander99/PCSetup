@@ -8,6 +8,7 @@ Install-module MSGraph -Scope AllUsers -Confirm:$false
 Install-module MSOnline -Scope AllUsers -Confirm:$false
 Install-module Bicep -Scope AllUsers -Confirm:$false
 Install-module ExchangeOnlineManagement -Confirm:$false
+Install-Module MicrosoftTeams -confirm:false
 
 
 #Install Chocolatey

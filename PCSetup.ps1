@@ -46,7 +46,7 @@ choco install discord -y
 choco install AzureStorageExplorer -y
 choco install anydesk -y
 choco install nmap -y
-choco install pibakery -y
+choco install rpi-imager -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

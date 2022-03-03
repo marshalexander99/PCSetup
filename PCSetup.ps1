@@ -48,6 +48,8 @@ choco install AzureStorageExplorer -y
 choco install anydesk -y
 choco install nmap -y
 choco install rpi-imager -y
+choco install datagrip -y
+choco install PyCharm-community -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

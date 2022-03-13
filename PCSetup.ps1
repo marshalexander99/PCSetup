@@ -50,6 +50,7 @@ choco install nmap -y
 choco install rpi-imager -y
 choco install datagrip -y
 choco install PyCharm-community -y
+choco install Typora -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'

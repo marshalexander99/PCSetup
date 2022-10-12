@@ -8,8 +8,9 @@ Install-module MSGraph -Scope AllUsers -Confirm:$false
 Install-module MSOnline -Scope AllUsers -Confirm:$false
 Install-module Bicep -Scope AllUsers -Confirm:$false
 Install-module ExchangeOnlineManagement -Scope AllUsers -Confirm:$false
-Install-Module MicrosoftTeams -Scope AllUsers -confirm:false
-
+Install-Module MicrosoftTeams -Scope AllUsers -confirm:$false
+Install-Module AzureAD -Scope AllUsers -confirm:$false
+Install-Module WindowsAutoPilotIntune -Scope AllUsers -confirm:$false
 
 # Install Azure CLI
 $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
@@ -46,7 +47,11 @@ choco install discord -y
 choco install AzureStorageExplorer -y
 choco install anydesk -y
 choco install nmap -y
-choco install pibakery -y
+choco install rpi-imager -y
+choco install datagrip -y
+choco install PyCharm-community -y
+choco install Typora -y
+choco install postman -y
 
 # Install Powershell 7
 write-host 'Customization: Install the latest Microsoft PowerShell'
